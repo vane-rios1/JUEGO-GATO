@@ -1,0 +1,36 @@
+# JUEGO DEL GATO
+
+# ALGORITMO EN PSEINT
+Es un algoritmo del juego del Gato (también conocido como Tres en Línea o Tic Tac Toe) para dos jugadores, hecho en pseudocódigo con PSeInt. El programa permite jugar varias partidas y llevar un historial de victorias y empates.
+Funcionamiento paso a paso:
+
+1. Inicializa variables:
+- Crea un tablero de 3x3 vacío con guiones -.
+- Define contadores para las victorias del jugador 1 (X), del jugador 2 (O) y los empates.
+- Usa una variable turno para saber qué jugador juega.
+
+2. Ciclo principal de juego:
+- El programa entra en un bucle para repetir el juego mientras los jugadores deseen seguir jugando.
+
+3. Inicio de cada partida:
+- El tablero se reinicia con guiones (-) en todas las posiciones.
+- Se determina quién juega según si el turno es impar (Jugador 1 - X) o par (Jugador 2 - O).
+
+4. Cada turno de juego:
+- Se muestra el tablero.
+- Se pide al jugador que indique una fila y columna para colocar su símbolo (X o O).
+- Si la posición es válida y está libre, se coloca el símbolo.
+- Se verifica si el jugador actual ganó (comprobando filas, columnas o diagonales).
+- Si no hay ganador, se pasa el turno al siguiente jugador.
+
+5. Fin de la partida:
+- Si alguien gana, se muestra el mensaje correspondiente.
+- Si se completan los 9 turnos sin ganador, se declara un empate.
+- Se actualizan los contadores del historial (victoriasX, victoriasO, empates).
+
+6. Mostrar historial:
+- Al final de cada partida se muestra el número de victorias de cada jugador y los empates acumulados.
+
+7. Repetir o salir:
+- Se pregunta si desean jugar otra partida (S para sí, N para no).
+- Si eligen no, el programa termina mostrando un mensaje de despedida.
