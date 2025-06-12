@@ -41,3 +41,34 @@ Funcionamiento paso a paso:
 7. Repetir o salir:
 - Se pregunta si desean jugar otra partida (S para sí, N para no).
 - Si eligen no, el programa termina mostrando un mensaje de despedida.
+
+
+#PROGRAMACION ESTRUCTURADO EN PYTHON
+1.Inicio:
+Se piden los nombres de los dos jugadores.
+
+2. Bucle de juego:
+Permite jugar varias partidas seguidas.
+
+3. Inicio de partida:
+Se crea un tablero vacío y comienza el Jugador 1.
+
+4. Turnos:
+
+Muestra el tablero.
+
+Pide al jugador la fila y columna.
+
+Valida si la casilla está libre.
+
+Coloca el símbolo (X o O).
+
+Verifica si alguien ganó o si hubo empate.
+
+Si no, cambia de turno.
+
+5. Fin de partida:
+Anuncia el ganador o el empate.
+
+6. Repetir o salir:
+Pregunta si desean jugar otra partida. Si no, termina el juego.
