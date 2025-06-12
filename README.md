@@ -44,6 +44,7 @@ Funcionamiento paso a paso:
 
 
 #PROGRAMACION ESTRUCTURADO EN PYTHON
+
 1.Inicio:
 Se piden los nombres de los dos jugadores.
 
