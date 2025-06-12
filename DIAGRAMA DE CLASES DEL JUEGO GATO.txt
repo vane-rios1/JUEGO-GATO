@@ -1,0 +1,34 @@
+DIAGRAMA DE CLASES DEL JUEGO GATO 
+
++------------------+                         # Clase que representa a un jugador del juego
+|     Jugador      |                         
++------------------+
+| - nombre: str    |                         # Nombre del jugador
+| - simbolo: str   |                         # Símbolo que usará en el tablero (X u O)
++------------------+
+| + __init__(nombre: str, simbolo: str) |    # Constructor que inicializa el nombre y símbolo
++------------------+
+
+        1
+        |
+        | Usa                                     # La clase JuegoGato usa (o depende de) Jugador
+        |
+        v
+
++------------------------------+                  # Clase principal que controla el juego del gato
+|         JuegoGato           |
++------------------------------+
+| - tablero: list[str]        |                  # Representa el tablero como una lista de 9 strings
+| - jugadores: list[Jugador]  |                  # Lista de dos objetos Jugador (X y O)
+| - turno: int                |                  # Índice para saber de quién es el turno (0 o 1)
+| - historial: list[str]      |                  # Guarda un historial de las jugadas realizadas
++------------------------------+
+| + __init__()                |                  # Constructor: inicializa tablero, jugadores, etc.
+| + mostrar_tablero()         |                  # Muestra el estado actual del tablero
+| + verificar_ganador(simbolo: str): bool |      # Verifica si el símbolo dado ha ganado
+| + tablero_lleno(): bool     |                  # Devuelve True si el tablero ya no tiene espacios
+| + jugar_turno()             |                  # Gestiona la lógica de un turno individual
+| + jugar_partida()           |                  # Controla el flujo completo de una partida
+| + mostrar_historial()       |                  # Muestra todas las jugadas realizadas
+| + iniciar()                 |                  # Método principal para arrancar el juego
++------------------------------+
