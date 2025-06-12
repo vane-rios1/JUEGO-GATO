@@ -1,11 +1,11 @@
 # JUEGO DEL GATO
 En esta práctica colaborativa realizamos la creación de códigos de un juego llamado Gato (también conocido como Tres en Línea o Tic Tac Toe). Los programas que creamos fueron:
 
-Algoritmo en PSeInt ----- Vanessa Ríos Pérez
-Programacion Esctructurada en Python ------ Elías Coyotzi Sosa
-Programacion Orientada a Objetos ------- Melanie Sosa Degabriel
-Programacion en Tkinter -------- Dalila Yusaví Conde Flores
-Diagrama de clases ---------- Paulina Sánchez Ramírez
+- Algoritmo en PSeInt ----- Vanessa Ríos Pérez
+- Programacion Esctructurada en Python ------ Elías Coyotzi Sosa
+- Programacion Orientada a Objetos ------- Melanie Sosa Degabriel
+- Programacion en Tkinter -------- Dalila Yusaví Conde Flores
+- Diagrama de clases ---------- Paulina Sánchez Ramírez
 
 # ALGORITMO EN PSEINT
 Es un algoritmo del juego del Gato (también conocido como Tres en Línea o Tic Tac Toe) para dos jugadores, hecho en pseudocódigo con PSeInt. El programa permite jugar varias partidas y llevar un historial de victorias y empates.
