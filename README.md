@@ -73,3 +73,21 @@ Anuncia el ganador o el empate.
 
 6. Repetir o salir:
 Pregunta si desean jugar otra partida. Si no, termina el juego.
+
+
+
+
+# DIAGRAMA DE CLASES
+
+Este diagrama muestra cómo está organizado el código de nuestro juego del gato. Hay dos clases principales:
+
+1. Jugador: 
+Representa a cada jugador. Guarda su nombre y el símbolo que va a usar ('X' o 'O'). Ademas, su constructor se encarga de inicializar esos datos cuando se crea el jugador.
+
+2. JuegoGato:
+Es la clase que maneja toda la lógica del juego. Tiene atributos como el tablero (una lista con 9 posiciones), los dos jugadores, el turno actual y un historial de jugadas.
+Incluye métodos para mostrar el tablero, verificar si alguien ganó, revisar si el tablero está lleno, jugar un turno, mostrar el historial y arrancar el juego completo.
+Además, se indica que JuegoGato usa a la clase Jugador, ya que necesita crear dos jugadores para que la partida funcione.
+
+En resumen, este diagrama organiza de forma clara cómo se estructura un juego del gato usando programación orientada a objetos. La clase Jugador se encarga de representar a los participantes, mientras que JuegoGato gestiona toda la lógica del juego. 
+Gracias a esta separación de responsabilidades, el código es más ordenado, fácil de entender y de mantener.
