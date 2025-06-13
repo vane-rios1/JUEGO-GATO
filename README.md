@@ -43,7 +43,7 @@ Funcionamiento paso a paso:
 - Si eligen no, el programa termina mostrando un mensaje de despedida.
 
 
-#PROGRAMACION ESTRUCTURADO EN PYTHON
+# PROGRAMACION ESTRUCTURADO EN PYTHON
 
 1.Inicio:
 Se piden los nombres de los dos jugadores.
