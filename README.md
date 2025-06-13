@@ -73,6 +73,15 @@ Anuncia el ganador o el empate.
 
 6. Repetir o salir:
 Pregunta si desean jugar otra partida. Si no, termina el juego.
+---------------------------------------------------- PROGRAMACION ORIENTADO A OBJETOS EN PYTHON-------------------------------------
+
+El código es un juego de Gato (Tres en línea) para dos jugadores en consola. Está dividido en clases:
+	•	Jugador: guarda el nombre y símbolo (X u O).
+	•	JuegoGato: maneja el tablero, turnos, historial, y la lógica del juego.
+
+El jugador elige una posición (del 1 al 9), se actualiza el tablero, y se verifica si alguien ganó o si hay empate. Al final, se puede jugar otra partida y se muestra el historial de resultados.
+
+Es un programa bien organizado, fácil de entender y jugar.
 
 # PROGRAMACION TKINTER EN PYTHON
 
