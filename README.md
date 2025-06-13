@@ -74,7 +74,7 @@ Anuncia el ganador o el empate.
 6. Repetir o salir:
 Pregunta si desean jugar otra partida. Si no, termina el juego.
 
------------------------------------------------------------- PROGRAMACION TKINTER EN PYTHON--------------------------------------------------------
+# PROGRAMACION TKINTER EN PYTHON
 
 Este programa en Python crea un juego del gato usando la biblioteca  tkinter .  El código implementa la lógica del juego, incluyendo la comprobación de victorias, empates, y la actualización de la puntuación.  La interfaz gráfica de usuario (GUI) permite a dos jugadores interactuar con el tablero, haciendo clic en los botones para colocar sus marcas ('X' u 'O').  Después de cada turno, el programa verifica si hay un ganador o un empate, mostrando un mensaje correspondiente.  También incluye un botón para reiniciar el juego y una sección que muestra la puntuación actual.
 
