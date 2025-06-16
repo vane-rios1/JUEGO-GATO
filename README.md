@@ -6,6 +6,7 @@ En esta práctica colaborativa realizamos la creación de códigos de un juego l
 - Programacion Orientada a Objetos ------- Melanie Sosa Degabriel
 - Programacion en Tkinter -------- Dalila Yusaví Conde Flores
 - Diagrama de clases ---------- Paulina Sánchez Ramírez
+- Programacion Orientada a Objetos sin excepciones --------- Melanie Sosa Degabriel
 
 # ALGORITMO EN PSEINT
 Es un algoritmo del juego del Gato (también conocido como Tres en Línea o Tic Tac Toe) para dos jugadores, hecho en pseudocódigo con PSeInt. El programa permite jugar varias partidas y llevar un historial de victorias y empates.
