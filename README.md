@@ -73,7 +73,8 @@ Anuncia el ganador o el empate.
 
 6. Repetir o salir:
 Pregunta si desean jugar otra partida. Si no, termina el juego.
----------------------------------------------------- PROGRAMACION ORIENTADO A OBJETOS EN PYTHON-------------------------------------
+
+# PROGRAMACION ORIENTADO A OBJETOS EN PYTHON
 
 El código es un juego de Gato (Tres en línea) para dos jugadores en consola. Está dividido en clases:
 	•	Jugador: guarda el nombre y símbolo (X u O).
@@ -103,7 +104,7 @@ Además, se indica que JuegoGato usa a la clase Jugador, ya que necesita crear d
 En resumen, este diagrama organiza de forma clara cómo se estructura un juego del gato usando programación orientada a objetos. La clase Jugador se encarga de representar a los participantes, mientras que JuegoGato gestiona toda la lógica del juego. 
 Gracias a esta separación de responsabilidades, el código es más ordenado, fácil de entender y de mantener.
 
-# OOP sin excepciones
+# POO sin excepciones
 Se usan dos clases:
 	•	Jugador: guarda el nombre y símbolo (X u O).
 	•	JuegoGato: contiene el tablero, la lógica del juego y el turno.
