@@ -102,3 +102,12 @@ Además, se indica que JuegoGato usa a la clase Jugador, ya que necesita crear d
 
 En resumen, este diagrama organiza de forma clara cómo se estructura un juego del gato usando programación orientada a objetos. La clase Jugador se encarga de representar a los participantes, mientras que JuegoGato gestiona toda la lógica del juego. 
 Gracias a esta separación de responsabilidades, el código es más ordenado, fácil de entender y de mantener.
+
+# OOP sin excepciones
+Se usan dos clases:
+	•	Jugador: guarda el nombre y símbolo (X u O).
+	•	JuegoGato: contiene el tablero, la lógica del juego y el turno.
+	•	El juego valida las entradas del usuario sin usar try-except.
+	•	El juego termina usando una variable juego_activo = False, sin usar exit().
+	•	Se detecta si hay un ganador o si hay empate y se muestra el resultado.
+
