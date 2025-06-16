@@ -2,29 +2,42 @@ import tkinter as tk
 from tkinter import messagebox
 
 def check_win(board, player):
-    """Comprueba si el jugador ha ganado."""
     win_conditions = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],  # Filas
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],  # Columnas
-        [0, 4, 8], [2, 4, 6]             # Diagonales
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
     ]
     for condition in win_conditions:
         if all(board[i] == player for i in condition):
-            return True
-    return False
+            return condition
+    return None
 
 def check_draw(board):
-    """Comprueba si hay un empate."""
     return all(cell != "" for cell in board)
 
-def button_click(button_index):
-    """Maneja los clics de los botones."""
-    global current_player, board
-    if board[button_index] == "":
-        board[button_index] = current_player
-        buttons[button_index].config(text=current_player)
-        if check_win(board, current_player):
-            messagebox.showinfo("¡Ganador!", f"¡El jugador {current_player} ha ganado!")
+def button_click(index):
+    global current_player
+    if not game_started:
+        messagebox.showinfo("Advertencia", "Debes iniciar el juego primero.")
+        return
+
+    if board[index] == "":
+        board[index] = current_player
+        buttons[index].config(text=current_player)
+        if current_player == "X":
+            buttons[index].config(bg="yellow")
+        else:
+            buttons[index].config(bg="light blue")
+
+        win_positions = check_win(board, current_player)
+        if win_positions:
+            for i in range(9):
+                buttons[i].config(bg="light gray")
+            for i in win_positions:
+                buttons[i].config(bg="light green")
+
+            ganador = player_x_name.get() if current_player == "X" else player_o_name.get()
+            messagebox.showinfo("¡Ganador!", f"¡Jugador {current_player}: {ganador} ha ganado!")
             update_score(current_player)
             disable_buttons()
         elif check_draw(board):
@@ -33,74 +46,137 @@ def button_click(button_index):
             disable_buttons()
         else:
             current_player = "O" if current_player == "X" else "X"
-            label.config(text=f"Turno del jugador: {current_player}")
+            siguiente = player_x_name.get() if current_player == "X" else player_o_name.get()
+            label.config(text=f"Turno de: Jugador {current_player} - {siguiente}")
+    else:
+        messagebox.showwarning("Casilla ocupada", "Esa casilla ya está ocupada.")
 
 def update_score(winner):
-    """Actualiza el historial de resultados."""
     global score_x, score_o, draws
     if winner == "X":
         score_x += 1
     elif winner == "O":
         score_o += 1
-    elif winner == "Empate":
+    else:
         draws += 1
-    score_label.config(text=f"Victorias - X: {score_x} | O: {score_o} | Empates: {draws}")
+    score_label.config(text=f"Victorias - {player_x_name.get()} (X): {score_x} | {player_o_name.get()} (O): {score_o} | Empates: {draws}")
 
 def disable_buttons():
-    """Desactiva los botones después de que alguien gane o haya un empate."""
     for button in buttons:
         button.config(state=tk.DISABLED)
 
 def reset_game():
-    """Reinicia el tablero para una nueva partida."""
-    global board, current_player
+    global board, current_player, game_started
     board = [""] * 9
-    current_player = "X"
     for button in buttons:
-        button.config(text="", state=tk.NORMAL)
-    label.config(text=f"Turno del jugador: {current_player}")
+        button.config(text="", state=tk.NORMAL, bg="SystemButtonFace")
+    label.config(text="Selecciona quién empieza y presiona 'Iniciar juego'")
+    player_selector.config(state="normal")
+    start_button.config(state="normal")
+    game_started = False
 
-# Variables de puntaje
-score_x = 0
-score_o = 0
-draws = 0
+def start_game():
+    global current_player, game_started
+    name_x = player_x_name.get().strip()
+    name_o = player_o_name.get().strip()
+    current_player = selected_player.get()
 
-# Crea la ventana principal
+    if not name_x or not name_o:
+        messagebox.showwarning("Campos vacíos", "Debes ingresar los nombres de ambos jugadores.")
+        return
+
+    if current_player not in ["X", "O"]:
+        messagebox.showwarning("Selección inválida", "Debes seleccionar quién comienza (X u O).")
+        return
+
+    game_started = True
+    player_selector.config(state="disabled")
+    start_button.config(state="disabled")
+    turno = name_x if current_player == "X" else name_o
+    label.config(text=f"Turno de: Jugador {current_player} - {turno}")
+
+# Inicializar ventana y variables
 window = tk.Tk()
 window.title("Tres en Raya")
 
-# Crea las variables del juego
+score_x = 0
+score_o = 0
+draws = 0
 board = [""] * 9
-current_player = "X"
-
-# Crea los botones del tablero
 buttons = []
+current_player = ""
+game_started = False
+
+# Nombres de jugadores
+tk.Label(window, text="Jugador X - Nombre:").grid(row=0, column=0)
+player_x_name = tk.Entry(window)
+player_x_name.grid(row=0, column=1)
+
+tk.Label(window, text="Jugador O - Nombre:").grid(row=1, column=0)
+player_o_name = tk.Entry(window)
+player_o_name.grid(row=1, column=1)
+
+# Selector de jugador inicial
+tk.Label(window, text="¿Quién comienza?").grid(row=2, column=0)
+selected_player = tk.StringVar()
+selected_player.set("Selecciona")
+player_selector = tk.OptionMenu(window, selected_player, "X", "O")
+player_selector.grid(row=2, column=1)
+
+start_button = tk.Button(window, text="Iniciar juego", command=start_game)
+start_button.grid(row=2, column=2)
+
+# Crear botones del tablero
 for i in range(9):
-    button = tk.Button(window, text="", width=10, height=5,
-                       command=lambda index=i: button_click(index))
-    button.grid(row=i // 3, column=i % 3)
-    buttons.append(button)
+    btn = tk.Button(window, text="", width=10, height=5, font=("Arial", 20),
+                    command=lambda idx=i: button_click(idx))
+    btn.grid(row=(i // 3) + 3, column=i % 3)
+    buttons.append(btn)
 
-# Etiqueta del turno del jugador
-label = tk.Label(window, text=f"Turno del jugador: {current_player}")
-label.grid(row=3, column=0, columnspan=3)
+# Etiqueta de turno
+label = tk.Label(window, text="Selecciona quién empieza y presiona 'Iniciar juego'", font=("Arial", 12))
+label.grid(row=6, column=0, columnspan=3)
 
-# Etiqueta del historial
-score_label = tk.Label(window, text="Victorias - X: 0 | O: 0 | Empates: 0")
-score_label.grid(row=4, column=0, columnspan=3)
+# Etiqueta de marcador
+score_label = tk.Label(window, text="Victorias - Jugador X: 0 | Jugador O: 0 | Empates: 0", font=("Arial", 12))
+score_label.grid(row=7, column=0, columnspan=3)
 
 # Botón para reiniciar
 reset_button = tk.Button(window, text="Reiniciar Juego", command=reset_game)
-reset_button.grid(row=5, column=0, columnspan=3, pady=5)
+reset_button.grid(row=8, column=0, columnspan=3, pady=5)
 
-# Instrucciones del juego
-instructions = (
-    "Instrucciones:\n"
-    "1. Dos jugadores se turnan para colocar sus marcas (X u O) en un tablero de 3x3.\n"
-    "2. El primer jugador en obtener tres marcas en fila, columna o diagonal gana.\n"
-    "3. Si el tablero se llena sin que ningún jugador gane, es un empate."
-)
-instructions_label = tk.Label(window, text=instructions, justify="left")
-instructions_label.grid(row=6, column=0, columnspan=3, pady=5)
+# Instrucciones con Listbox y Scrollbar
+instructions_frame = tk.Frame(window)
+instructions_frame.grid(row=9, column=0, columnspan=3, pady=5)
 
+scrollbar = tk.Scrollbar(instructions_frame)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+instructions_list = tk.Listbox(instructions_frame, width=50, height=10, yscrollcommand=scrollbar.set)
+
+instrucciones = [
+    "INSTRUCCIONES:",
+    "1. Escribe los nombres de los jugadores X y O.",
+    "2. Selecciona quién comienza (X u O).",
+    "3. Presiona el botón 'Iniciar juego'.",
+    "4. Cada jugador hará clic en una casilla vacía para colocar su símbolo.",
+    "5. El primero en lograr tres en línea (horizontal, vertical o diagonal) gana.",
+    "6. Si todas las casillas se llenan sin ganador, es empate.",
+    "7. Presiona 'Reiniciar juego' para comenzar una nueva partida.",
+    "",
+    "SIGNIFICADO DE COLORES:",
+    "- X aparece con fondo amarillo.",
+    "- O aparece con fondo azul.",
+    "- Las casillas ganadoras se pintan de verde.",
+    "- Las demás se desactivan en gris tras finalizar la partida."
+]
+
+for item in instrucciones:
+    instructions_list.insert(tk.END, item)
+
+instructions_list.config(state=tk.DISABLED)
+instructions_list.pack(side=tk.LEFT, fill=tk.BOTH)
+scrollbar.config(command=instructions_list.yview)
+
+# Ejecutar la aplicación
 window.mainloop()
