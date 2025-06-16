@@ -126,24 +126,34 @@ score_label.grid(row=5, column=0, columnspan=3)
 reset_button = tk.Button(window, text="Reiniciar Juego", command=reset_game)
 reset_button.grid(row=6, column=0, columnspan=3, pady=5)
 
-# Instrucciones
+# Instrucciones con scroll
 instructions = (
     "Instrucciones:\n"
-    "1. Elige un jugador (X u O) para que empieze a jugar primero. \n"
-    "2. Dale click en boton Inicar juego. \n"
+    "1. Elige un jugador (X u O) para que empiece a jugar primero.\n"
+    "2. Dale clic en botón Iniciar juego.\n"
     "3. Dos jugadores se turnan para colocar sus marcas (X u O) en un tablero de 3x3.\n"
     "4. El primer jugador en obtener tres marcas en fila, columna o diagonal gana.\n"
-    "5. Si el tablero se llena sin que ningún jugador gane, es un empate\n"
-    "6. Presiona 'Reiniciar Juego' para volver a jugar\n"
-    
-    
+    "5. Si el tablero se llena sin que ningún jugador gane, es un empate.\n"
+    "6. Presiona 'Reiniciar Juego' para volver a jugar.\n\n"
     "Significado de los colores:\n"
     "- X aparece con fondo amarillo\n"
     "- O aparece con fondo azul\n"
     "- Al ganar, las celdas ganadoras se pintan de verde\n"
-    
 )
-instructions_label = tk.Label(window, text=instructions, justify="left")
-instructions_label.grid(row=7, column=0, columnspan=3, pady=5)
 
+# Crear Frame e insertar Scroll + Text
+instructions_frame = tk.Frame(window)
+instructions_frame.grid(row=7, column=0, columnspan=3, pady=5)
+
+scrollbar = tk.Scrollbar(instructions_frame)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+instructions_text = tk.Text(instructions_frame, height=8, width=50, wrap=tk.WORD, yscrollcommand=scrollbar.set)
+instructions_text.insert(tk.END, instructions)
+instructions_text.config(state=tk.DISABLED)
+instructions_text.pack(side=tk.LEFT, fill=tk.BOTH)
+
+scrollbar.config(command=instructions_text.yview)
+
+# Ejecutar la aplicación
 window.mainloop()
