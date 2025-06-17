@@ -45,6 +45,13 @@ COMBINACIONES_GANADORAS = [...]
 El nombre JuegoGato podría llamarse JuegoDelGato o TresEnRaya si se quiere más claridad.
 Dejar líneas en blanco entre métodos (visualmente ya está bien).
 
+5. Agrega docstrings y comentarios más explícitos:
+def verificar_ganador(self, simbolo):
+    """Verifica si el jugador con el símbolo dado ha ganado el juego."""
+   
+6. Posibilidad de reiniciar el juego:
+Luego de terminar, se podria preguntar si quieren jugar otra partida.
+
 
 
 
