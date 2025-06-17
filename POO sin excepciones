@@ -1,0 +1,97 @@
+class Jugador:
+    def __init__(self, nombre, simbolo):
+        self.nombre = nombre                                     
+        self.simbolo = simbolo         
+
+# Esta bien definida la clase `Jugador`, y tiene nombres claros
+
+class JuegoGato:
+    def __init__(self):
+    self.tablero = [" " for _ in range(9)]                 # Uso correcto de list comprehension
+    self.jugadores = []                                   # Se podria iniciar directamente con dos objetos Jugador, solo si es que siempre serán dos                                                                  # Esta bien, aunque se podría usar un booleano si solo hay dos turnos 
+    self.turno = 0
+    self.empates = 0                 # Contador de empates
+
+    def mostrar_tablero(self):
+        print("\n")
+        for i in range(3):
+            print(" | ".join(self.tablero[i*3:(i+1)*3]))            # Forma compacta y clara
+            if i < 2:
+                print("--+---+--")
+
+    def es_entero(self, valor):
+        return valor.isdigit()
+    # Este nombre puede ser confuso: isdigit porque solo funciona para positivos. Seria mejor ponerle algo como `es_numero_positivo`
+
+    def entrada_valida(self, entrada):
+    try:
+        posicion = int(entrada) - 1
+        return 0 <= posicion < 9 and self.tablero[posicion] == " "
+    except ValueError:
+        return False
+
+        # Tiene una lógica correcta, aunque puede mejorarse:
+        # Seria mejor usar la excepción con try-except por si `int()` falla
+
+    def verificar_ganador(self, simbolo):
+        combinaciones = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],        # filas
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],        # columnas
+            [0, 4, 8], [2, 4, 6]                    # diagonales
+        ]
+        for combo in combinaciones:
+            if all(self.tablero[i] == simbolo for i in combo):
+                return True
+        return False
+
+        # Esta bien implementado y es legible. No le critico nada aqui
+
+  def jugar(self):
+    print("¡Bienvenido al Juego del Gato!")
+    nombre1 = input("Nombre del Jugador 1 (X): ")
+    nombre2 = input("Nombre del Jugador 2 (O): ")
+    self.jugadores = [Jugador(nombre1, "X"), Jugador(nombre2, "O")]
+
+    while True:                            # Permitir múltiples juegos sin reiniciar el programa
+        self.reiniciar_tablero()
+        juego_activo = True
+
+        while juego_activo:
+            self.mostrar_tablero()
+            jugador_actual = self.jugadores[self.turno % 2]
+            print(f"\nTurno de {jugador_actual.nombre} ({jugador_actual.simbolo})")
+
+            entrada = input("Elige una posición (1-9): ")
+            if self.entrada_valida(entrada):
+                posicion = int(entrada) - 1
+                self.tablero[posicion] = jugador_actual.simbolo
+
+                if self.verificar_ganador(jugador_actual.simbolo):
+                    self.mostrar_tablero()
+                    print(f"\n¡{jugador_actual.nombre} ha ganado!")
+                    juego_activo = False
+                elif " " not in self.tablero:
+                    self.mostrar_tablero()
+                    print("\n¡Empate!")
+                    self.empates += 1        # Sumar empate
+                    juego_activo = False
+                else:
+                    self.turno += 1
+            else:
+                print("Entrada inválida. Elige un número entre 1 y 9 sin repetir.")
+
+        print(f"\n Empates acumulados: {self.empates}")
+        jugar_otra = input("¿Jugar otra vez? (s/n): ").lower()
+        if jugar_otra != 's':
+            print("¡Gracias por jugar!")
+            break
+
+
+
+# Este código no debería estar fuera de un `if __name__ == "__main__":`
+# Esto evitaría que se ejecute si el archivo se importa desde otro lado y pues no serviria 
+
+if __name__ == "__main__":
+    juego = JuegoGato()
+    juego.jugar()
+
