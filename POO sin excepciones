@@ -23,10 +23,11 @@ class JuegoGato:
     # Este nombre puede ser confuso: isdigit porque solo funciona para positivos. Seria mejor ponerle algo como `es_numero_positivo`
 
     def entrada_valida(self, entrada):
-        if not self.es_entero(entrada):
-            return False
+    try:
         posicion = int(entrada) - 1
         return 0 <= posicion < 9 and self.tablero[posicion] == " "
+    except ValueError:
+        return False
 
         # Tiene una lógica correcta, aunque puede mejorarse:
         # Seria mejor usar la excepción con try-except por si `int()` falla
@@ -73,6 +74,8 @@ class JuegoGato:
                     self.turno += 1
             else:
                 print("Entrada inválida. Asegúrate de ingresar un número entre 1 y 9 que no esté ocupado.")
+
+            
 
 # Este código no debería estar fuera de un `if __name__ == "__main__":`
 # Esto evitaría que se ejecute si el archivo se importa desde otro lado y pues no serviria 
