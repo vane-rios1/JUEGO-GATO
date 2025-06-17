@@ -1,34 +1,39 @@
 DIAGRAMA DE CLASES DEL JUEGO GATO 
 
-+------------------+                         # Clase que representa a un jugador del juego
-|     Jugador      |                         
-+------------------+
-| - nombre: str    |                         # Nombre del jugador
-| - simbolo: str   |                         # Símbolo que usará en el tablero (X u O)
-+------------------+
-| + __init__(nombre: str, simbolo: str) |    # Constructor que inicializa el nombre y símbolo
-+------------------+
+# ══════════════════════════════════════════════════════════════
+# Clase que representa a un jugador del juego
++--------------------------+               # ← Nombre de la clase
+|         Clase: Jugador  |
++--------------------------+
+| - nombre: str           |               # ← Atributo privado: nombre del jugador
+| - simbolo: str          |               # ← Atributo privado: símbolo del jugador (X u O)
++--------------------------+
+| + __init__(nombre: str, simbolo: str) | # ← Método público: constructor de la clase
++--------------------------+
+# Esta clase contiene solo los datos del jugador (nombre y símbolo)
 
-        1
-        |
-        | Usa                                     # La clase JuegoGato usa (o depende de) Jugador
-        |
-        v
-
-+------------------------------+                  # Clase principal que controla el juego del gato
-|         JuegoGato           |
-+------------------------------+
-| - tablero: list[str]        |                  # Representa el tablero como una lista de 9 strings
-| - jugadores: list[Jugador]  |                  # Lista de dos objetos Jugador (X y O)
-| - turno: int                |                  # Índice para saber de quién es el turno (0 o 1)
-| - historial: list[str]      |                  # Guarda un historial de las jugadas realizadas
-+------------------------------+
-| + __init__()                |                  # Constructor: inicializa tablero, jugadores, etc.
-| + mostrar_tablero()         |                  # Muestra el estado actual del tablero
-| + verificar_ganador(simbolo: str): bool |      # Verifica si el símbolo dado ha ganado
-| + tablero_lleno(): bool     |                  # Devuelve True si el tablero ya no tiene espacios
-| + jugar_turno()             |                  # Gestiona la lógica de un turno individual
-| + jugar_partida()           |                  # Controla el flujo completo de una partida
-| + mostrar_historial()       |                  # Muestra todas las jugadas realizadas
-| + iniciar()                 |                  # Método principal para arrancar el juego
-+------------------------------+
+                      ▲                    # ← Relación de uso (JuegoGato usa Jugador)
+                      |
+                      |
+# ══════════════════════════════════════════════════════════════
+# Clase principal que controla la lógica del juego del gato
++---------------------------------------------+
+|           Clase: JuegoGato                  |   # ← Nombre de la clase
++---------------------------------------------+
+| - tablero: list[str]                        |   # ← Atributo privado: lista de 9 posiciones del tablero
+| - jugadores: list[Jugador]                  |   # ← Atributo privado: lista de dos objetos Jugador
+| - turno: int                                |   # ← Atributo privado: indica de quién es el turno
+| - historial: list[str]                      |   # ← Atributo privado: guarda los ganadores de partidas anteriores
+| - empates: int                              |   # ← Atributo privado: cuenta los empates
++---------------------------------------------+
+| + __init__()                                |   # ← Método público: constructor, inicializa el juego
+| + mostrar_tablero(): None                   |   # ← Método público: muestra el tablero en consola
+| + verificar_ganador(simbolo: str): bool     |   # ← Método público: verifica si un jugador ha ganado
+| + tablero_lleno(): bool                     |   # ← Método público: verifica si el tablero está lleno
+| + pedir_posicion(jugador: Jugador): int     |   # ← Método público: pide al jugador una posición válida
+| + jugar_turno(): None                       |   # ← Método público: ejecuta el turno del jugador actual
+| + jugar_partida(): None                     |   # ← Método público: gestiona una partida completa
+| + mostrar_historial(): None                 |   # ← Método público: muestra el historial de partidas
+| + iniciar(): None                           |   # ← Método público: inicia el ciclo del juego completo
++---------------------------------------------+
+# Esta clase controla toda la lógica del juego del gato (turnos, tablero, historial, empates, etc.)
