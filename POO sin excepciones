@@ -3,21 +3,24 @@ class Jugador:
         self.nombre = nombre
         self.simbolo = simbolo
 
+# Esta bien definida la clase `Jugador`, y tiene nombres claros
+
 class JuegoGato:
     def __init__(self):
-        self.tablero = [" " for _ in range(9)]
-        self.jugadores = []
-        self.turno = 0
+        self.tablero = [" " for _ in range(9)]       # Uso correcto de list comprehension
+        self.jugadores = []                       # Se podria iniciar directamente con dos objetos Jugador, solo si es que siempre serán dos
+        self.turno = 0                              # Esta bien, aunque se podría usar un booleano si solo hay dos turnos
 
     def mostrar_tablero(self):
         print("\n")
         for i in range(3):
-            print(" | ".join(self.tablero[i*3:(i+1)*3]))
+            print(" | ".join(self.tablero[i*3:(i+1)*3]))            # Forma compacta y clara
             if i < 2:
                 print("--+---+--")
 
     def es_entero(self, valor):
         return valor.isdigit()
+    # Este nombre puede ser confuso: isdigit porque solo funciona para positivos. Seria mejor ponerle algo como `es_numero_positivo`
 
     def entrada_valida(self, entrada):
         if not self.es_entero(entrada):
@@ -25,16 +28,21 @@ class JuegoGato:
         posicion = int(entrada) - 1
         return 0 <= posicion < 9 and self.tablero[posicion] == " "
 
+        # Tiene una lógica correcta, aunque puede mejorarse:
+        # Seria mejor usar la excepción con try-except por si `int()` falla
+
     def verificar_ganador(self, simbolo):
         combinaciones = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8],  # filas
-            [0, 3, 6], [1, 4, 7], [2, 5, 8],  # columnas
-            [0, 4, 8], [2, 4, 6]              # diagonales
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],        # filas
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],        # columnas
+            [0, 4, 8], [2, 4, 6]                    # diagonales
         ]
         for combo in combinaciones:
             if all(self.tablero[i] == simbolo for i in combo):
                 return True
         return False
+
+        # Esta bien implementado y es legible. No le critico nada aqui
 
     def jugar(self):
         print("¡Bienvenido al Juego del Gato!")
@@ -66,6 +74,9 @@ class JuegoGato:
             else:
                 print("Entrada inválida. Asegúrate de ingresar un número entre 1 y 9 que no esté ocupado.")
 
-# Ejecutar el juego
+# Este código no debería estar fuera de un `if __name__ == "__main__":`
+# Esto evitaría que se ejecute si el archivo se importa desde otro lado y pues no serviria 
+
 juego = JuegoGato()
 juego.jugar()
+
