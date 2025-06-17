@@ -75,7 +75,11 @@ class JuegoGato:
             else:
                 print("Entrada inválida. Asegúrate de ingresar un número entre 1 y 9 que no esté ocupado.")
 
-            
+            def reiniciar_tablero(self):
+    """Reinicia el tablero y el turno inicial."""
+    self.tablero = [" " for _ in range(9)]
+    self.turno = 0
+
 
 # Este código no debería estar fuera de un `if __name__ == "__main__":`
 # Esto evitaría que se ejecute si el archivo se importa desde otro lado y pues no serviria 
