@@ -4,7 +4,7 @@ def inicializar_tablero():
     return [[" " for _ in range(3)] for _ in range(3)]
 
 def mostrar_tablero(tablero):
-    print("  0 1 2")
+    print("\n 0 1 2")
     for i, fila in enumerate(tablero):
         print(f"{i} {'|'.join(fila)}")
         if i < 2:
@@ -36,6 +36,7 @@ def obtener_simbolo(jugador, jugadores, simbolos):
 def jugar_una_partida(jugadores, simbolos):
     tablero = inicializar_tablero()
     jugador_actual = jugadores[0]
+    print("\n--- Nueva Partida ---\n")
     
     while True:
         mostrar_tablero(tablero)
@@ -69,16 +70,17 @@ def jugar_una_partida(jugadores, simbolos):
 
 def juego_del_gato():
     print("Bienvenidos al juego del Gato (Tic Tac Toe)!")
-    nombre_jugador1 = input("Ingrese el nombre del Jugador 1 (usará 'X'): ")
-    nombre_jugador2 = input("Ingrese el nombre del Jugador 2 (usará 'O'): ")
+    nombre_jugador1 = input("Ingrese el nombre del Jugador 1 (usará 'X'): ").strip()
+    nombre_jugador2 = input("Ingrese el nombre del Jugador 2 (usará 'O'): ").strip()
 
-    jugadores = [nombre_jugador1, nombre_jugador2]
+    jugadores = [nombre_jugador1 or "jugador 1", nombre_jugador2 or "jgador 2"]
     simbolos = ["X", "O"]
 
     while True:
         jugar_una_partida(jugadores, simbolos)
-        respuesta = input("¿Desean jugar otra partida? (s/n): ").strip().lower()
+        respuesta = input("\n¿Desean jugar otra partida? (s/n): ").strip().lower()
         if respuesta != 's':
+        print("\nReiniciando juego...\n")
             print("Gracias por jugar. ¡Hasta la próxima!")
             break
 
