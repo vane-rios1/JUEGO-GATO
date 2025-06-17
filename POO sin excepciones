@@ -84,6 +84,7 @@ class JuegoGato:
 # Este código no debería estar fuera de un `if __name__ == "__main__":`
 # Esto evitaría que se ejecute si el archivo se importa desde otro lado y pues no serviria 
 
-juego = JuegoGato()
-juego.jugar()
+if __name__ == "__main__":
+    juego = JuegoGato()
+    juego.jugar()
 
